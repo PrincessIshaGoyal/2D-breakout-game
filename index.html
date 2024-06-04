@@ -18,6 +18,7 @@
   <body>
     <canvas id="myCanvas" width="480" height="320"></canvas>
     <button id="runButton">Start game</button>
+    <button id="pause">Pause game</button>
 
     <script>
 
@@ -35,6 +36,7 @@ const ctx = canvas.getContext("2d");
 
 let x = canvas.width/2;
 let y = canvas.height - 30;
+let d = [2, -2, true];
 let dx = 2;
 let dy = -2;
 let ballRadius = 10;
@@ -181,7 +183,7 @@ function collisionDetection() {
 
           if (score%10 == 0) {
             paddleWidth += 5;
-            const n = setInterval(reducePaddleWidth, 3000);
+            const nter = setInterval(reducePaddleWidth, 3000);
           }
         }
       }
@@ -191,7 +193,8 @@ function collisionDetection() {
 
 function reducePaddleWidth() {
 paddleWidth -= 5;
-clearInterval(n);
+console.log(paddleWidth);
+clearInterval(nter);
 }
 
 function startGame() {
@@ -201,9 +204,25 @@ function startGame() {
   const interval = setInterval(draw, 10);
 }
 
+function pauseGame() {
+  if(d[2]) {
+    d = [dx, dy, true];
+    dx = 0;
+    dy = 0;
+  } else {
+    dx = d[0];
+    dy = d[1];
+  }
+}
+
 document.getElementById("runButton").addEventListener("click", function () {
   startGame();
   this.disabled = true;
+});
+
+document.getElementById("pause").addEventListener("click", function () {
+  pauseGame();
+  d[2] = !d[2];
 });
 
 drawBricks();
