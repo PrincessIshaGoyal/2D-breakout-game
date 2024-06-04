@@ -182,8 +182,8 @@ function collisionDetection() {
           }
 
           if (score%10 == 0) {
-            paddleWidth += 5;
-            const nter = setInterval(reducePaddleWidth, 3000);
+            paddleWidth = 90;
+            setTimeout(reducePaddleWidth, 3000);
           }
         }
       }
@@ -192,9 +192,8 @@ function collisionDetection() {
 }
 
 function reducePaddleWidth() {
-paddleWidth -= 5;
+paddleWidth = 75;
 console.log(paddleWidth);
-clearInterval(nter);
 }
 
 function startGame() {
